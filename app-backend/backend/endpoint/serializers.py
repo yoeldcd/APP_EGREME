@@ -2,11 +2,10 @@ from rest_framework import serializers
 from backend.models import Producer
 
 class ProducerSerializer(serializers.ModelSerializer):
-    request = None
-    
     class Meta:
         model = Producer
         fields = [
+            'id',
             'username',
             'email',
             'first_name',

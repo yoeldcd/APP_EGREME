@@ -118,7 +118,7 @@ class ProducerManager:
             
             # make response
             response['producer'] = producer
-            response['query_message']='Producer created '+str(producer)
+            response['query_message']='Producer created'
             
         except InternalError:
             response['query_message']='Internal error when create'
@@ -138,6 +138,7 @@ class ProducerManager:
         has_changed = False
         last_modified = datetime.now()
         last_modifier = req.user
+        response['updated_fields'] = list()
         
         has_field_errors = False
         response['duplicated_fields'] = list()
@@ -160,19 +161,26 @@ class ProducerManager:
                     has_field_errors = True
                 else:
                     has_changed = True
+                    response['duplicated_fields'].appends('username')
                     producer.username = username
             
             # check email field
             if email == '':
                 response['empty_fields'].append('email')
                 has_field_errors = True
-            elif email != email.username:
+            elif email != producer.username:
                 if Producer.objects.filter(email=email).count() > 0:
                     response['duplicated_fields'].append('email')
                     has_field_errors = True
                 else:
                     has_changed = True
+                    response['duplicated_fields'].appends('email')
                     producer.email = email
+            
+            # check first name
+            
+            # check last name
+            
             
             if has_field_errors:
                 response['query_message']='Wrong input data'

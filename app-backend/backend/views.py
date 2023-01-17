@@ -33,9 +33,9 @@ class EditProducerView(APIView):
             return Response(response.get('query_message',''), status=status.HTTP_404_NOT_FOUND)
         
         else:
-            serializer = ProducerSerializer(response.get('producer'), many=True)
-            return Response(serializer.data)
-
+            response['producer'] = ProducerSerializer(response.get('producer')).data
+            return Response(response)
+    
     def post(self, req:Request):
         q_params = req.data
         response = dict()
@@ -47,14 +47,14 @@ class EditProducerView(APIView):
         
         # make Http REST Response
         if state == INTERNAL_ERROR:
-            return Response('', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(response.get('query_message',''), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
         elif state == FIELDS_ERROR:
-            return Response('', status=status.HTTP_406_NOT_ACCEPTABLE)
+            return Response(response.get('query_message',''), status=status.HTTP_406_NOT_ACCEPTABLE)
         
         else:
-            serializer = ProducerSerializer(response.get('producer'), many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            response['producer'] = ProducerSerializer(response.get('producer')).data
+            return Response(response, status=status.HTTP_200_OK)
     
     def put(self, req:Request):
         q_params = req.data 
@@ -74,8 +74,8 @@ class EditProducerView(APIView):
             return Response(response.get('query_message'), status=status.HTTP_404_NOT_FOUND)
         
         else:
-            serializer = ProducerSerializer(response.get('producer'), many=True)
-            return Response(serializer.data)
+            response['producer'] = ProducerSerializer(response.get('producer')).data
+            return Response(response)
             
     def delete(self, req:Request):
         q_params = req.data 
@@ -92,7 +92,7 @@ class EditProducerView(APIView):
             return Response(response.get('query_message',''), status=status.HTTP_404_NOT_FOUND)
         
         else:
-            serializer = ProducerSerializer(response.get('producer'), many=True)
-            return Response(serializer.data)
+            response['producer'] = ProducerSerializer(response.get('producer')).data
+            return Response(response)
         
     
