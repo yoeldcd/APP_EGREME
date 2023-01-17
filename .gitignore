@@ -1,6 +1,4 @@
 
 /.tmp.driveupload
-/app-backend/.gitignore
 /app-backend/vem
-
-**/__pycache__/**
+/app-backend/**/__pycache__/**
