@@ -44,14 +44,14 @@ class ProducerManager:
             
             # make response
             response['producer'] = producer
-            response['query_message']='Producer getted '+producer
+            response['query_message']=f'Producer with id = {id} found'
             
         except InternalError:
             response['query_message']='Internal error when fetch'
             return INTERNAL_ERROR
         
         except Producer.DoesNotExist:
-            response['query_message']=f'Producer with pk{id} not found'
+            response['query_message']=f'Producer with id = {id} not found'
             return INSTANCE_NOT_FOUND
         
         return SUCCESS    
@@ -65,7 +65,7 @@ class ProducerManager:
         email = str(q_params.get('email',''))
         
         last_modified = datetime.now()
-        last_modifier = req.user
+        last_modifier = req.user.username
         
         has_field_errors = False
         response['duplicated_fields'] = list()
@@ -118,10 +118,10 @@ class ProducerManager:
             
             # make response
             response['producer'] = producer
-            response['query_message']='Producer created'
+            response['query_message']= f'Producer  with id = {producer.id} created'
             
         except InternalError:
-            response['query_message']='Internal error when create'
+            response['query_message']= 'Internal error when create'
             return INTERNAL_ERROR
         
         return SUCCESS
@@ -137,7 +137,7 @@ class ProducerManager:
         
         has_changed = False
         last_modified = datetime.now()
-        last_modifier = req.user
+        last_modifier = req.user.username
         response['updated_fields'] = list()
         
         has_field_errors = False
@@ -154,7 +154,6 @@ class ProducerManager:
             # check username field
             if username == '':
                 response['empty_fields'].append('username')
-                has_field_errors = True
             elif username != producer.username:
                 if Producer.objects.filter(username=username).count() > 0:
                     response['duplicated_fields'].append('username')
@@ -167,45 +166,57 @@ class ProducerManager:
             # check email field
             if email == '':
                 response['empty_fields'].append('email')
-                has_field_errors = True
             elif email != producer.username:
                 if Producer.objects.filter(email=email).count() > 0:
                     response['duplicated_fields'].append('email')
                     has_field_errors = True
                 else:
                     has_changed = True
-                    response['duplicated_fields'].appends('email')
+                    response['changed_fields'].appends('email')
                     producer.email = email
             
             # check first name
+            if first_name == '':
+                response['empty_fields'].append('first_name')
+            elif first_name != producer.first_name:
+                has_changed = True
+                response['changed_fields'].appends('first_name')
+                producer.first_name = first_name
             
             # check last name
-            
+            if last_name == '':
+                response['empty_fields'].append('last_name')
+            elif last_name != producer.last_name:
+                has_changed = True
+                response['changed_fields'].appends('last_name')
+                producer.last_name = last_name
             
             if has_field_errors:
                 response['query_message']='Wrong input data'
                 return FIELDS_ERROR
             
+            # make response
+            response['producer'] = producer
+            
             if has_changed:
+            
                 # update DB instance
                 producer.last_modified = last_modified
                 producer.last_modifier = last_modifier
                 producer.save()
-                    
-                print('Producer updated '+producer)
-            
-            # make response
-            response['producer'] = producer
-            response['query_message']='Producer updated '+producer
+                
+                response['query_message']= f'Producer with id = {id}  updated'
+
+            else:
+                response['query_message']= f'Producer  with id = {id} not changed'
             
         except Producer.DoesNotExist:
-            response['query_message']=f'Producer with pk{id} not found'
+            response['query_message']=f'Producer with id = {id} not found'
             return INSTANCE_NOT_FOUND
         
         except InternalError:
             response['query_message']='Internal error when update'
             return INTERNAL_ERROR
-        
         
         return SUCCESS        
     
@@ -215,14 +226,15 @@ class ProducerManager:
             id = int(q_params.get('id','0'))
             
             # remove user from DB
-            producer = Producer.objects.delete(id=id)
-
+            producer = Producer.objects.get(id=id)
+            producer.delete()
+            
             # make response
             response['producer'] = producer
-            response['query_message']='Producer deleted '+producer
+            response['query_message']=f'Producer with id = {id} deleted'
             
         except Producer.DoesNotExist:
-            response['query_message']=f'Producer with pk{id} not found'
+            response['query_message']=f'Producer with id = {id} not found'
             return INSTANCE_NOT_FOUND
         
         except InternalError:

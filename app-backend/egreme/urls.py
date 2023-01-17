@@ -27,7 +27,7 @@ from django.contrib.auth.decorators import login_required
 urlpatterns = [
     
     path('admin/', admin.site.urls),
-    path('list/', GetProducerListView.as_view(), name='list'),
-    path('edit/', EditProducerView.as_view(), name='edit'), 
-    path('api/', include(router_producer.urls), name='api')    
+    path('producer/list/', GetProducerListView.as_view(), name='list'),
+    path('producer/manage/', ManageProducerView.as_view(), name='manage'), 
+        
 ]

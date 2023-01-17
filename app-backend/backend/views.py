@@ -11,12 +11,12 @@ from rest_framework.response import Response
 from backend.models import *
 from backend.endpoint.serializers import ProducerSerializer
 
-class GetProducerListView(generics.ListCreateAPIView):
+class GetProducerListView(generics.ListAPIView):
     queryset = Producer.objects.all()
     serializer_class = ProducerSerializer
     
 # Create your views here.
-class EditProducerView(APIView):
+class ManageProducerView(APIView):
     
     def get(self, req:Request):
         q_params = req.query_params 
@@ -39,8 +39,6 @@ class EditProducerView(APIView):
     def post(self, req:Request):
         q_params = req.data
         response = dict()
-        
-        print(q_params)
         
         # execute data model query
         state = ProducerManager.create_producer(req, q_params, response)
@@ -78,7 +76,7 @@ class EditProducerView(APIView):
             return Response(response)
             
     def delete(self, req:Request):
-        q_params = req.data 
+        q_params = req.data
         response = dict()
         
         # execute data model query
@@ -95,4 +93,3 @@ class EditProducerView(APIView):
             response['producer'] = ProducerSerializer(response.get('producer')).data
             return Response(response)
         
-    
