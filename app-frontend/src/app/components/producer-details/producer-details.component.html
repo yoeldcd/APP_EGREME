@@ -1,15 +1,9 @@
 <div *ngIf="viewMode; else editable">
-  <div *ngIf="currentTutorial.id">
+  <div *ngIf="currentProducer.id">
     <h4>Productor:</h4>
 
     <div>
       <label><strong>Usuario:</strong></label> {{ currentProducer.username }}
-    </div>
-
-    <!--Present producer first name -->
-    <div>
-      <label><strong>Nombre:</strong></label>
-      {{ currentProducer.first_name }}
     </div>
 
     <!--Present producer first name -->
@@ -37,61 +31,106 @@
       <time>
         {{ currentProducer.last_modified }}
       </time>
-
     </div>
 
-
-    <a class="badge badge-warning" routerLink="/producer/{{ currentProducer.id }}">
-      Editar
-    </a>
-
+    <div class="row">
+      <div class="col-md-8"></div>
+      <div class="col text-end">
+        <a
+          class="btn btn-lg btn-primary text-ligth m-2"
+          routerLink="/producer/{{ currentProducer.id }}"
+        >
+          Editar
+        </a>
+      </div>
+    </div>
   </div>
 
   <div *ngIf="!currentProducer">
     <br />
-    <p>No hay producores registrados, cree uno Nuevo</p>
+    <p>No hay productores registrados, cree uno Nuevo</p>
   </div>
 </div>
 
 <ng-template #editable>
   <div *ngIf="currentProducer.id" class="edit-form">
-    <h4>Agregar Productor</h4>
+    <h2>Editar Productor</h2>
 
     <!--Producer username field -->
     <div class="form-group">
       <label for="input_username">Usuario</label>
-      <input type="text" class="form-control" id="username" required
-        [(ngModel)]="currentProducer.username" name="input_username" />
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        required
+        [(ngModel)]="currentProducer.username"
+        name="input_username"
+      />
     </div>
 
     <!--Producer first_name field -->
     <div class="form-group">
       <label for="input_first_name">Nombre</label>
-      <input type="text" class="form-control" id="first_name" required
-        [(ngModel)]="currentProducer.first_name" name="input_first_name" />
+      <input
+        type="text"
+        class="form-control"
+        id="first_name"
+        required
+        [(ngModel)]="currentProducer.first_name"
+        name="input_first_name"
+      />
     </div>
 
     <!--Producer last_name field -->
     <div class="form-group">
       <label for="input_last_name">Apellido</label>
-      <input type="text" class="form-control" id="last_name" required
-        [(ngModel)]="currentProducer.last_name" name="input_last_name" />
+      <input
+        type="text"
+        class="form-control"
+        id="last_name"
+        required
+        [(ngModel)]="currentProducer.last_name"
+        name="input_last_name"
+      />
     </div>
 
     <!--Producer email field -->
     <div class="form-group">
       <label for="input_email">Correo</label>
-      <input type="email" class="form-control" id="email" required
-        [(ngModel)]="currentProducer.last_name" name="input_email" />
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        required
+        [(ngModel)]="currentProducer.email"
+        name="input_email"
+      />
     </div>
-    
-    <button class="badge badge-danger mr-2" (click)="deleteProducer()">
-      Eliminar
-    </button>
-    
-    <button type="submit" class="badge badge-success mb-2" (click)="updateProducer()">
-      Guardar Cambios
-    </button>
+
+    <div class="row">
+      <div class="col-4 text-center">
+        <button class="btn btn-lg btn-danger" (click)="deleteProducer()">
+          Eliminar
+        </button>
+      </div>
+
+      <div class="col-4 text-center">
+        <button
+          type="submit"
+          class="btn btn-lg btn-success"
+          (click)="updateProducer()"
+        >
+          Guardar
+        </button>
+      </div>
+
+      <div class="col-4 text-center">
+        <a routerLink="" class="btn btn-lg btn-primary text-ligth">
+          Cancelar
+        </a>
+      </div>
+    </div>
 
     <p>{{ message }}</p>
   </div>
@@ -101,4 +140,10 @@
     <p>Datos del productor no encontrado</p>
   </div>
 
+  <div *ngIf="submited">
+    <h4>Los datos del productor se actualizaron satisfactoriamente</h4>
+    <a routerLink="" class="btn btn-lg btn-danger text-ligth">
+      Volver a la lista
+    </a>
+  </div>
 </ng-template>

@@ -2,4 +2,10 @@
   text-align: left;
   max-width: 750px;
   margin: auto;
+  border: solid 2px black;
+}
+
+.item {
+  background-color: lightskyblue;
+  border-bottom: solid 2px black;
 }

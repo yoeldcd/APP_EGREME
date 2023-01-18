@@ -2,3 +2,8 @@
   max-width: 400px;
   margin: auto;
 }
+
+.form-control {
+  border: solid 2px blue;
+  border-radius: 35 px;
+}

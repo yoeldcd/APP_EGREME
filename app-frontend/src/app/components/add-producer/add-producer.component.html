@@ -1,7 +1,8 @@
 <div>
   <div class="submit-form">
     <div *ngIf="!submitted">
-      
+      <h2>Registrar Productor</h2>
+
       <!--Producer username field -->
       <div class="form-group">
         <label for="input_username">Usuario</label>
@@ -10,11 +11,12 @@
           class="form-control"
           id="username"
           required
+          placeholder="Escriba el nombre de usuario"
           [(ngModel)]="producer.username"
           name="input_username"
         />
       </div>
-      
+
       <!--Producer first_name field -->
       <div class="form-group">
         <label for="input_first_name">Nombre</label>
@@ -23,19 +25,21 @@
           class="form-control"
           id="first_name"
           required
+          placeholder="Escriba el Nombre"
           [(ngModel)]="producer.first_name"
           name="input_first_name"
         />
       </div>
-      
+
       <!--Producer last_name field -->
       <div class="form-group">
-        <label for="input_last_name">Apellido</label>
+        <label for="input_last_name">Apellidos</label>
         <input
           type="text"
           class="form-control"
           id="last_name"
           required
+          placeholder="Escriba los Apellidos"
           [(ngModel)]="producer.last_name"
           name="input_last_name"
         />
@@ -47,20 +51,36 @@
         <input
           type="email"
           class="form-control"
-          id="email"
+          id="mail"
           required
-          [(ngModel)]="producer.last_name"
+          placeholder="Escriba la direccion de correo"
+          ng-required="true"
+          ng-pattern=" ^[a-z]+[a-z0-9._-]+@[a-z]+\.[a-z.]{2,5}$"
+          [(ngModel)]="producer.email"
           name="input_email"
         />
       </div>
-      
-      <button (click)="saveProducer()" class="btn btn-success">Almacenar</button>
+
+      <div class="row">
+        <div class="col-6 text-center">
+          <button (click)="saveProducer()" class="btn btn-lg btn-success">
+            Almacenar
+          </button>
+        </div>
+
+        <div class="col-6 text-center">
+          <a routerLink="" class="btn btn-lg btn-danger text-ligth">
+            Cancelar
+          </a>
+        </div>
+      </div>
     </div>
 
     <div *ngIf="submitted">
       <h4>Los datos del productor se almacenaron satisfactoriamente</h4>
-      <button class="btn btn-success" (click)="newTutorial()">Nuevo</button>
+      <a routerLink="" class="btn btn-lg btn-danger text-ligth">
+        Volver a la lista
+      </a>
     </div>
-
   </div>
 </div>

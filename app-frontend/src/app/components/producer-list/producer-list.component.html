@@ -12,11 +12,24 @@
       </li>
     </ul>
 
-    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllProducers()">
-      Eliminar Registros
-    </button>
+    <div class="row my-2">
+      <div class="col-4 text-center">
+        <a routerLink="/add" class="btn btn-lg btn-primary text-ligth">
+          Nuevo
+        </a>
+      </div>
 
+      <div class="col text-center">
+        <button
+          class="btn btn-lg btn-danger text-ligth"
+          (click)="removeAllProducers()"
+        >
+          Eliminar Registros
+        </button>
+      </div>
+    </div>
   </div>
+
   <div class="col-md-6">
     <app-producer-details
       [viewMode]="true"
