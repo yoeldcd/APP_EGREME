@@ -1,0 +1,66 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      
+      <!--Producer username field -->
+      <div class="form-group">
+        <label for="input_username">Usuario</label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          required
+          [(ngModel)]="producer.username"
+          name="input_username"
+        />
+      </div>
+      
+      <!--Producer first_name field -->
+      <div class="form-group">
+        <label for="input_first_name">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="first_name"
+          required
+          [(ngModel)]="producer.first_name"
+          name="input_first_name"
+        />
+      </div>
+      
+      <!--Producer last_name field -->
+      <div class="form-group">
+        <label for="input_last_name">Apellido</label>
+        <input
+          type="text"
+          class="form-control"
+          id="last_name"
+          required
+          [(ngModel)]="producer.last_name"
+          name="input_last_name"
+        />
+      </div>
+
+      <!--Producer email field -->
+      <div class="form-group">
+        <label for="input_email">Correo</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          required
+          [(ngModel)]="producer.last_name"
+          name="input_email"
+        />
+      </div>
+      
+      <button (click)="saveProducer()" class="btn btn-success">Almacenar</button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>Los datos del productor se almacenaron satisfactoriamente</h4>
+      <button class="btn btn-success" (click)="newTutorial()">Nuevo</button>
+    </div>
+
+  </div>
+</div>

@@ -2,3 +2,6 @@
 /.tmp.driveupload
 /app-backend/vem
 /app-backend/**/__pycache__/**
+
+/app-frontend/node_modules/.staging
+/app-frontend/angular

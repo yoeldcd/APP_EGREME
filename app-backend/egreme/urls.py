@@ -27,7 +27,13 @@ from django.contrib.auth.decorators import login_required
 urlpatterns = [
     
     path('admin/', admin.site.urls),
-    path('producer/list/', GetProducerListView.as_view(), name='list'),
-    path('producer/manage/', ManageProducerView.as_view(), name='manage'), 
+    
+    path('api/producer/list/', ProducerListView.as_view(), name='list'),
+    path('api/producer/delete/all', ProducerListView.as_view(), name='delete_all'), 
+    
+    path('api/producer/post/', ManageProducerView.as_view(), name='post'), 
+    path('api/producer/get/<int:id>', ManageProducerView.as_view(), name='get'), 
+    path('api/producer/update/<int:id>', ManageProducerView.as_view(), name='update'), 
+    path('api/producer/delete/<int:id>', ManageProducerView.as_view(), name='delete'), 
         
 ]

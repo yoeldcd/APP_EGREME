@@ -33,10 +33,8 @@ class Producer(models.Model):
 
 class ProducerManager:
     
-    def get_producer(req:HttpRequest, q_params:dict, response:dict):
+    def get_producer(req:HttpRequest, id:int, q_params:dict, response:dict):
         
-        id = int(q_params.get('id','0'))
-            
         try:
             
             # remove user from DB
@@ -126,10 +124,9 @@ class ProducerManager:
         
         return SUCCESS
     
-    def update_producer(req:HttpRequest, q_params:dict, response:dict):
+    def update_producer(req:HttpRequest, id:int, q_params:dict, response:dict):
         
         # get params field values
-        id = int(q_params.get('id','0'))
         first_name = str(q_params.get('first_name',''))
         last_name = str(q_params.get('last_name',''))
         username = str(q_params.get('username',''))
@@ -220,10 +217,9 @@ class ProducerManager:
         
         return SUCCESS        
     
-    def delete_producer(req:HttpRequest, q_params:dict, response:dict):
+    def delete_producer(req:HttpRequest, id:int, q_params:dict, response:dict):
         
         try:
-            id = int(q_params.get('id','0'))
             
             # remove user from DB
             producer = Producer.objects.get(id=id)
@@ -241,4 +237,17 @@ class ProducerManager:
             response['query_message']='Internal error when delete'
             return INTERNAL_ERROR
         
-        return SUCCESS    
+        return SUCCESS
+    
+    def delete_all_producers(response):
+        
+        try:
+            Producer.objects.all().delete()
+            response['query_message']='All producers deleted'
+            
+        except InternalError:
+            response['query_message']='Internal error when delete'
+            return INTERNAL_ERROR
+        
+        return SUCCESS
+        
