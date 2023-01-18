@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'producers/list/', pathMatch: 'full' },
   { path: 'producers/list/', component: ProducerListComponent },
   { path: 'producer/:id', component: ProducerDetailsComponent },
-  { path: 'producer/post', component: AddProducerComponent }
+  { path: 'add', component: AddProducerComponent }
 ];
 
 @NgModule({

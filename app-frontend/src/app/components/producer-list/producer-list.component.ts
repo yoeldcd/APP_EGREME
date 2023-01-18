@@ -13,18 +13,18 @@ export class ProducerListComponent implements OnInit {
   currentProducer: Producer = {};
   currentIndex = -1;
   title = '';
-
+  
   constructor(private producerService: ProducerService) { }
 
   ngOnInit(): void {
     this.retrieveProducers();
   }
-
+  
   retrieveProducers(): void {
     this.producerService.getAll()
       .subscribe({
         next: (data) => {
-          this.producer = data;
+          this.currentProducer = data;
           console.log(data);
         },
         error: (e) => console.error(e)
@@ -37,8 +37,8 @@ export class ProducerListComponent implements OnInit {
     this.currentIndex = -1;
   }
 
-  setActiveProducer(tutorial: Producer, index: number): void {
-    this.currentProducer = tutorial;
+  setActiveProducer(producer: Producer, index: number): void {
+    this.currentProducer = producer;
     this.currentIndex = index;
   }
 
