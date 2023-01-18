@@ -1,0 +1,104 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentTutorial.id">
+    <h4>Productor:</h4>
+
+    <div>
+      <label><strong>Usuario:</strong></label> {{ currentProducer.username }}
+    </div>
+
+    <!--Present producer first name -->
+    <div>
+      <label><strong>Nombre:</strong></label>
+      {{ currentProducer.first_name }}
+    </div>
+
+    <!--Present producer first name -->
+    <div>
+      <label><strong>Nombre:</strong></label>
+      {{ currentProducer.first_name }}
+    </div>
+
+    <!--Present producer last name -->
+    <div>
+      <label><strong>Apellidos:</strong></label>
+      {{ currentProducer.last_name }}
+    </div>
+
+    <!--Present producer email -->
+    <div>
+      <label class="email"><strong>Correo:</strong></label>
+      {{ currentProducer.email }}
+    </div>
+
+    <!--Present producer modified data -->
+    <div>
+      <label><strong>Modificado:</strong></label>
+      {{ currentProducer.last_modifier }}
+      <time>
+        {{ currentProducer.last_modified }}
+      </time>
+
+    </div>
+
+
+    <a class="badge badge-warning" routerLink="/producer/{{ currentProducer.id }}">
+      Editar
+    </a>
+
+  </div>
+
+  <div *ngIf="!currentProducer">
+    <br />
+    <p>No hay producores registrados, cree uno Nuevo</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentProducer.id" class="edit-form">
+    <h4>Agregar Productor</h4>
+
+    <!--Producer username field -->
+    <div class="form-group">
+      <label for="input_username">Usuario</label>
+      <input type="text" class="form-control" id="username" required
+        [(ngModel)]="currentProducer.username" name="input_username" />
+    </div>
+
+    <!--Producer first_name field -->
+    <div class="form-group">
+      <label for="input_first_name">Nombre</label>
+      <input type="text" class="form-control" id="first_name" required
+        [(ngModel)]="currentProducer.first_name" name="input_first_name" />
+    </div>
+
+    <!--Producer last_name field -->
+    <div class="form-group">
+      <label for="input_last_name">Apellido</label>
+      <input type="text" class="form-control" id="last_name" required
+        [(ngModel)]="currentProducer.last_name" name="input_last_name" />
+    </div>
+
+    <!--Producer email field -->
+    <div class="form-group">
+      <label for="input_email">Correo</label>
+      <input type="email" class="form-control" id="email" required
+        [(ngModel)]="currentProducer.last_name" name="input_email" />
+    </div>
+    
+    <button class="badge badge-danger mr-2" (click)="deleteProducer()">
+      Eliminar
+    </button>
+    
+    <button type="submit" class="badge badge-success mb-2" (click)="updateProducer()">
+      Guardar Cambios
+    </button>
+
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentProducer.id">
+    <br />
+    <p>Datos del productor no encontrado</p>
+  </div>
+
+</ng-template>

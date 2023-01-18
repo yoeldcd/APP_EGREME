@@ -9,10 +9,11 @@ import { Producer } from 'src/app/models/producer.model';
   styleUrls: ['./producer-details.component.css']
 })
 export class ProducerDetailsComponent implements OnInit {
-
+  
   @Input() viewMode = false;
-
+  
   @Input() currentProducer: Producer = {
+    id: 0,
     username: '',
     first_name: '',
     last_name: '',
@@ -47,9 +48,10 @@ export class ProducerDetailsComponent implements OnInit {
   }
 
   updatePublished(status: boolean): void {
-
+    
     // get producer data to present
     const data = {
+      id: this.currentProducer.id,
       username: this.currentProducer.username,
       first_name: this.currentProducer.first_name,
       last_name: this.currentProducer.last_name,
