@@ -20,7 +20,7 @@
 
     <!--Present producer email -->
     <div>
-      <label class="email"><strong>Correo:</strong>{{ currentProducer.email }}</label>
+      <label class="email"><strong>Correo: </strong>{{ currentProducer.email }}</label>
     </div>
 
     <!--Present producer modified data -->
@@ -50,6 +50,7 @@
     <br />
     <p>No hay productores registrados, cree uno Nuevo</p>
   </div>
+
 </div>
 
 <ng-template #editable>
@@ -62,60 +63,61 @@
       <input type="text" class="form-control" id="username" required
         [(ngModel)]="currentProducer.username" name="input_username" />
     </div>
-
+    
     <!--Producer first_name field -->
     <div class="form-group">
       <label for="input_first_name">Nombre</label>
       <input type="text" class="form-control" id="first_name" required
         [(ngModel)]="currentProducer.first_name" name="input_first_name" />
     </div>
-
+    
     <!--Producer last_name field -->
     <div class="form-group">
       <label for="input_last_name">Apellido</label>
       <input type="text" class="form-control" id="last_name" required
         [(ngModel)]="currentProducer.last_name" name="input_last_name" />
     </div>
-
+    
     <!--Producer email field -->
     <div class="form-group">
       <label for="input_email">Correo</label>
       <input type="email" class="form-control" id="email" required [(ngModel)]="currentProducer.email"
         name="input_email" />
     </div>
-
+    
     <div class="row">
       <div class="col-4 text-center">
         <button class="btn btn-lg btn-danger" (click)="deleteProducer()">
           Eliminar
         </button>
       </div>
-
+      
       <div class="col-4 text-center">
         <button type="submit" class="btn btn-lg btn-success" (click)="updateProducer()">
           Guardar
         </button>
       </div>
-
+      
       <div class="col-4 text-center">
         <a routerLink="" class="btn btn-lg btn-primary text-ligth">
           Cancelar
         </a>
       </div>
     </div>
-
+    
     <p>{{ message }}</p>
   </div>
-
+  
   <div *ngIf="!currentProducer.id">
     <br />
     <p>Datos del productor no encontrado</p>
   </div>
-
+  
   <div *ngIf="submited">
-    <h4>Los datos del productor se actualizaron satisfactoriamente</h4>
+    <h4>Los datos del productor se almacenaron satisfactoriamente</h4>
     <a routerLink="" class="btn btn-lg btn-danger text-ligth">
       Volver a la lista
     </a>
   </div>
+
 </ng-template>

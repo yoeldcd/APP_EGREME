@@ -6,10 +6,11 @@ import { AddProducerComponent } from './components/add-producer/add-producer.com
 
 // define CRUD management sreen routes
 const routes: Routes = [
-  { path: '', redirectTo: 'producers/list/', pathMatch: 'full' },
   { path: 'producers/list/', component: ProducerListComponent },
   { path: 'producer/:id', component: ProducerDetailsComponent },
-  { path: 'add', component: AddProducerComponent }
+  { path: 'add', component: AddProducerComponent },
+  { path: '', redirectTo: 'producers/list/', pathMatch: 'full' }
+  
 ];
 
 @NgModule({

@@ -135,7 +135,7 @@ class ProducerManager:
         has_changed = False
         last_modified = datetime.now()
         last_modifier = req.user.username
-        response['updated_fields'] = list()
+        response['changed_fields'] = list()
         
         has_field_errors = False
         response['duplicated_fields'] = list()
@@ -157,7 +157,7 @@ class ProducerManager:
                     has_field_errors = True
                 else:
                     has_changed = True
-                    response['duplicated_fields'].append('username')
+                    response['changed_fields'].append('username')
                     producer.username = username
             
             # check email field

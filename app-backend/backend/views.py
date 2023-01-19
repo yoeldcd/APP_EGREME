@@ -43,8 +43,7 @@ class ManageProducerView(APIView):
             return Response(response, status=status.HTTP_404_NOT_FOUND)
         
         else:
-            response['producer'] = ProducerSerializer(response.get('producer')).data
-            return Response(response)
+            return Response(ProducerSerializer(response.get('producer')).data, status=status.HTTP_200_OK)
     
     def post(self, req:Request):
         q_params = req.data
@@ -61,8 +60,7 @@ class ManageProducerView(APIView):
             return Response(response, status=status.HTTP_406_NOT_ACCEPTABLE)
         
         else:
-            response['producer'] = ProducerSerializer(response.get('producer')).data
-            return Response(response, status=status.HTTP_200_OK)
+            return Response(ProducerSerializer(response.get('producer')).data, status=status.HTTP_200_OK)
     
     def put(self, req:Request, id:int):
         q_params = req.data 
@@ -82,9 +80,8 @@ class ManageProducerView(APIView):
             return Response(response, status=status.HTTP_404_NOT_FOUND)
         
         else:
-            response['producer'] = ProducerSerializer(response.get('producer')).data
-            return Response(response)
-            
+            return Response(ProducerSerializer(response.get('producer')).data, status=status.HTTP_200_OK)
+    
     def delete(self, req:Request, id:int):
         q_params = req.data
         response = dict()
@@ -100,5 +97,5 @@ class ManageProducerView(APIView):
             return Response(response, status=status.HTTP_404_NOT_FOUND)
         
         else:
-            response['producer'] = ProducerSerializer(response.get('producer')).data
-            return Response(response)
+            return Response(ProducerSerializer(response.get('producer')).data, status=status.HTTP_200_OK)
+    

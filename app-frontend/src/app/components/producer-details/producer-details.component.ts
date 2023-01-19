@@ -63,12 +63,11 @@ export class ProducerDetailsComponent implements OnInit {
     };
 
     this.message = '';
-
+    
     this.ProducerService.update(this.currentProducer.id, data).subscribe({
       next: (res) => {
-        console.log(res);
+        console.log('updated: '+res);
         this.submited = true
-        
       },
       error: (e) => console.error(e),
     });
@@ -83,9 +82,11 @@ export class ProducerDetailsComponent implements OnInit {
     ).subscribe({
       next: (res) => {
         console.log(res);
-        this.message = res.message
-          ? res.message
-          : 'This Producer was updated successfully!';
+
+        this.submited = true;
+        this.router.navigate(['']);
+        alert('Datos actualizados satisfactoriamente')
+        
       },
       error: (e) => {
         let data = e.error;
@@ -101,7 +102,7 @@ export class ProducerDetailsComponent implements OnInit {
         }
 
         let message = 'ERROR EN LOS DATOS INTRODUCIDOS';
-
+        
         if (empty.length > 0)
           message += '\nRELLENE LOS CAMPOS VACIOS: \n' + empty;
 
