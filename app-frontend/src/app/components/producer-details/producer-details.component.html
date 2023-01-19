@@ -20,26 +20,26 @@
 
     <!--Present producer email -->
     <div>
-      <label class="email"><strong>Correo:</strong></label>
-      {{ currentProducer.email }}
+      <label class="email"><strong>Correo:</strong>{{ currentProducer.email }}</label>
     </div>
 
     <!--Present producer modified data -->
     <div>
       <label><strong>Modificado:</strong></label>
-      {{ currentProducer.last_modifier }}
       <time>
         {{ currentProducer.last_modified }}
       </time>
+      <br>
+      <strong>
+        Por: {{ currentProducer.last_modifier }}
+      </strong>
+
     </div>
 
     <div class="row">
       <div class="col-md-8"></div>
       <div class="col text-end">
-        <a
-          class="btn btn-lg btn-primary text-ligth m-2"
-          routerLink="/producer/{{ currentProducer.id }}"
-        >
+        <a class="btn btn-lg btn-primary text-ligth m-2" routerLink="/producer/{{ currentProducer.id }}">
           Editar
         </a>
       </div>
@@ -59,53 +59,29 @@
     <!--Producer username field -->
     <div class="form-group">
       <label for="input_username">Usuario</label>
-      <input
-        type="text"
-        class="form-control"
-        id="username"
-        required
-        [(ngModel)]="currentProducer.username"
-        name="input_username"
-      />
+      <input type="text" class="form-control" id="username" required
+        [(ngModel)]="currentProducer.username" name="input_username" />
     </div>
 
     <!--Producer first_name field -->
     <div class="form-group">
       <label for="input_first_name">Nombre</label>
-      <input
-        type="text"
-        class="form-control"
-        id="first_name"
-        required
-        [(ngModel)]="currentProducer.first_name"
-        name="input_first_name"
-      />
+      <input type="text" class="form-control" id="first_name" required
+        [(ngModel)]="currentProducer.first_name" name="input_first_name" />
     </div>
 
     <!--Producer last_name field -->
     <div class="form-group">
       <label for="input_last_name">Apellido</label>
-      <input
-        type="text"
-        class="form-control"
-        id="last_name"
-        required
-        [(ngModel)]="currentProducer.last_name"
-        name="input_last_name"
-      />
+      <input type="text" class="form-control" id="last_name" required
+        [(ngModel)]="currentProducer.last_name" name="input_last_name" />
     </div>
 
     <!--Producer email field -->
     <div class="form-group">
       <label for="input_email">Correo</label>
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        required
-        [(ngModel)]="currentProducer.email"
-        name="input_email"
-      />
+      <input type="email" class="form-control" id="email" required [(ngModel)]="currentProducer.email"
+        name="input_email" />
     </div>
 
     <div class="row">
@@ -116,11 +92,7 @@
       </div>
 
       <div class="col-4 text-center">
-        <button
-          type="submit"
-          class="btn btn-lg btn-success"
-          (click)="updateProducer()"
-        >
+        <button type="submit" class="btn btn-lg btn-success" (click)="updateProducer()">
           Guardar
         </button>
       </div>

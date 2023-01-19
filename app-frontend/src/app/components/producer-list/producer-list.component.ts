@@ -43,18 +43,19 @@ export class ProducerListComponent implements OnInit {
   deleteActiveProducer(): void {
     this.producerService.delete(this.currentProducer.id).subscribe({
       next: (res) => {
-        alert('Productor eliminado satisfacoriamente');
         this.refreshList();
+        alert('Productor eliminado satisfacoriamente');
       },
       error: (e) => console.error(e),
     });
   }
-
-  removeAllProducers(): void {
+  
+  deleteAllProducers(): void {
     this.producerService.deleteAll().subscribe({
       next: (res) => {
         console.log(res);
         this.refreshList();
+        alert('Todos los productores fueron elimienados satisfactoriamente')
       },
       error: (e) => console.error(e),
     });

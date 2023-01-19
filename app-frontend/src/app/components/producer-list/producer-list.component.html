@@ -1,39 +1,32 @@
-<div class="list row">
-  <div class="col-md-6">
+<div class="list row align-content-center">
+  <div class="col-4">
     <h4>Lista de Productores</h4>
     <ul class="list-group">
-      <li
-        class="list-group-item"
-        *ngFor="let producer of producers; let i = index"
-        [class.active]="i == currentIndex"
-        (click)="setActiveProducer(producer, i)"
-      >
+      <li class="list-group-item" *ngFor="let producer of producers; let i = index"
+        [class.active]="i == currentIndex" (click)="setActiveProducer(producer, i)">
         {{ producer.username }}
       </li>
     </ul>
 
-    <div class="row my-2">
-      <div class="col-4 text-center">
-        <a routerLink="/add" class="btn btn-lg btn-primary text-ligth">
-          Nuevo
-        </a>
-      </div>
+    <div class="row m-2 p-2 justify-content-center">
 
-      <div class="col text-center">
-        <button
-          class="btn btn-lg btn-danger text-ligth"
-          (click)="removeAllProducers()"
-        >
-          Eliminar Registros
-        </button>
-      </div>
+      <a routerLink="/add" class="col-12 btn btn-md m-2 btn-success text-ligth">
+        Nuevo
+      </a>
+      
+      <button *ngIf="currentProducer.id" class="col-12 btn m-2 btn-md btn-danger text-ligth" (click)="deleteActiveProducer()">
+        Eliminar
+      </button>
+      
+      <button class="col-12 btn btn-md m-2 btn-danger text-ligth" (click)="deleteAllProducers()">
+        Eliminar Todos
+      </button>
+
     </div>
   </div>
-
-  <div class="col-md-6">
-    <app-producer-details
-      [viewMode]="true"
-      [currentProducer]="currentProducer"
-    ></app-producer-details>
+  
+  <div class="col m-2 border border-dark">
+    <app-producer-details [viewMode]="true" [currentProducer]="currentProducer"></app-producer-details>
   </div>
+
 </div>

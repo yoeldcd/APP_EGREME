@@ -81,7 +81,7 @@ class ProducerManager:
                     has_field_errors = True
                     
             # check email field
-            if email != '':
+            if email == '':
                 response['empty_fields'].append('email')
                 has_field_errors = True
             else:
@@ -157,7 +157,7 @@ class ProducerManager:
                     has_field_errors = True
                 else:
                     has_changed = True
-                    response['duplicated_fields'].appends('username')
+                    response['duplicated_fields'].append('username')
                     producer.username = username
             
             # check email field
@@ -169,7 +169,7 @@ class ProducerManager:
                     has_field_errors = True
                 else:
                     has_changed = True
-                    response['changed_fields'].appends('email')
+                    response['changed_fields'].append('email')
                     producer.email = email
             
             # check first name
@@ -177,7 +177,7 @@ class ProducerManager:
                 response['empty_fields'].append('first_name')
             elif first_name != producer.first_name:
                 has_changed = True
-                response['changed_fields'].appends('first_name')
+                response['changed_fields'].append('first_name')
                 producer.first_name = first_name
             
             # check last name
@@ -185,7 +185,7 @@ class ProducerManager:
                 response['empty_fields'].append('last_name')
             elif last_name != producer.last_name:
                 has_changed = True
-                response['changed_fields'].appends('last_name')
+                response['changed_fields'].append('last_name')
                 producer.last_name = last_name
             
             if has_field_errors:
